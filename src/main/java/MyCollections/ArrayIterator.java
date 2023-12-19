@@ -31,8 +31,6 @@ public class ArrayIterator<E> implements Iterator<E> {
     }
 
     /**
-     * Returns the next element in the iteration.
-     *
      * @return the next element in the iteration.
      */
     @Override

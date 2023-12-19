@@ -158,8 +158,6 @@ public class MyArrayList<E> implements MyList<E> {
     }
 
     /**
-     * Returns the current size of the list.
-     *
      * @return the size of the list.
      */
     @Override
@@ -204,8 +202,6 @@ public class MyArrayList<E> implements MyList<E> {
     }
 
     /**
-     * Returns an iterator over the elements in the list.
-     *
      * @return an iterator over the elements in the list.
      */
     @Override
@@ -215,8 +211,6 @@ public class MyArrayList<E> implements MyList<E> {
     }
 
     /**
-     * Returns a string representation of the list.
-     *
      * @return a string representation of the list.
      */
     @Override
