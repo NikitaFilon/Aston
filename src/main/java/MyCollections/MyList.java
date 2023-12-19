@@ -77,4 +77,9 @@ public interface MyList<E> extends Iterable<E> {
      */
     boolean isEmpty();
 
+    /**
+     * The method reduces the capacity of the list to its current size.
+     */
+    void trimToSize();
+
 }

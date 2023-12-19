@@ -54,9 +54,10 @@ public class MyArrayList<E> implements MyList<E> {
      *
      * @param index   the position at which to add the element.
      * @param element the element to be added.
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index >= size).
      */
     @Override
-    public void add(int index, E element) {
+    public void add(int index, E element) throws IndexOutOfBoundsException {
         rangeCheck(index);
         ensureCapacity();
         System.arraycopy(elements, index, elements, index + 1, size - index);
@@ -65,15 +66,24 @@ public class MyArrayList<E> implements MyList<E> {
     }
 
     /**
-     * Ensures that the list has enough capacity to add an element.
+     * Increases the capacity of the list if necessary.
      */
     private void ensureCapacity() {
         if (size == elements.length) {
             int newCapacity = elements.length * 2;
-            E[] newElements = (E[]) new Object[newCapacity];
-            System.arraycopy(elements, 0, newElements, 0, size);
-            elements = newElements;
+            copyElementsToNewArray(newCapacity);
         }
+    }
+
+    /**
+     * Copies elements to a new array with the specified capacity.
+     *
+     * @param newCapacity the new capacity of the array.
+     */
+    private void copyElementsToNewArray(int newCapacity) {
+        E[] newElements = (E[]) new Object[newCapacity];
+        System.arraycopy(elements, 0, newElements, 0, size);
+        elements = newElements;
     }
 
     /**
@@ -84,7 +94,7 @@ public class MyArrayList<E> implements MyList<E> {
      * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index >= size).
      */
     @Override
-    public E remove(int index) {
+    public E remove(int index) throws IndexOutOfBoundsException {
         rangeCheck(index);
         E oldElement = elements[index];
 
@@ -97,6 +107,17 @@ public class MyArrayList<E> implements MyList<E> {
 
         return oldElement;
     }
+
+    /**
+     * The method reduces the capacity of the list to its current size
+     */
+    @Override
+    public void trimToSize() {
+        if (size < elements.length) {
+            copyElementsToNewArray(size);
+        }
+    }
+
 
     /**
      * Checks if the index is within the bounds of the list size.
@@ -117,7 +138,7 @@ public class MyArrayList<E> implements MyList<E> {
      * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index >= size).
      */
     @Override
-    public E get(int index) {
+    public E get(int index) throws IndexOutOfBoundsException {
         rangeCheck(index);
         return elements[index];
     }
