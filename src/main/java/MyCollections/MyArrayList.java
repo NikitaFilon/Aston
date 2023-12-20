@@ -66,13 +66,21 @@ public class MyArrayList<E> implements MyList<E> {
     }
 
     /**
-     * Increases the capacity of the list if necessary.
+     * Check the capacity.
      */
     private void ensureCapacity() {
         if (size == elements.length) {
-            int newCapacity = elements.length * 2;
-            copyElementsToNewArray(newCapacity);
+            grow();
         }
+    }
+
+    /**
+     * Doubling the current capacity..
+     */
+    private void grow() {
+        int newCapacity = elements.length * 2;
+        copyElementsToNewArray(newCapacity);
+
     }
 
     /**
