@@ -15,6 +15,8 @@ public class MyArrayList<E> implements MyList<E> {
 
     private E[] elements;
 
+    private static final Object[] EMPTY_ARRAY = {};
+
     private int size;
 
     /**
@@ -34,8 +36,20 @@ public class MyArrayList<E> implements MyList<E> {
         if (initialCapacity < 0) {
             throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
         }
-        elements = (E[]) new Object[initialCapacity];
+        elements = (E[]) (initialCapacity == 0 ? EMPTY_ARRAY : new Object[initialCapacity]);
         this.size = 0;
+    }
+
+    /**
+     * Validates that the specified element is not null.
+     *
+     * @param element the element to be validated.
+     * @throws IllegalArgumentException if the element is null.
+     */
+    private void validateNotNull(E element) {
+        if (element == null) {
+            throw new IllegalArgumentException("Cannot set null element in the list");
+        }
     }
 
     /**
@@ -45,6 +59,7 @@ public class MyArrayList<E> implements MyList<E> {
      */
     @Override
     public void add(E element) {
+        validateNotNull(element);
         ensureCapacity();
         elements[size++] = element;
     }
@@ -58,6 +73,7 @@ public class MyArrayList<E> implements MyList<E> {
      */
     @Override
     public void add(int index, E element) throws IndexOutOfBoundsException {
+        validateNotNull(element);
         rangeCheck(index);
         ensureCapacity();
         System.arraycopy(elements, index, elements, index + 1, size - index);
@@ -161,6 +177,7 @@ public class MyArrayList<E> implements MyList<E> {
      */
     @Override
     public E set(int index, E element) {
+        validateNotNull(element);
         rangeCheck(index);
         return elements[index] = element;
     }
