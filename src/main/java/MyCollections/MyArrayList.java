@@ -235,6 +235,7 @@ public class MyArrayList<E> implements MyList<E> {
         return new ArrayIterator<>(copy);
     }
 
+
     /**
      * @return a string representation of the list.
      */
